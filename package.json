@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && npm run gulp && node dist/server.js",
+    "start": "npm run gulp && node dist/server.js",
     "gulp": "./node_modules/.bin/gulp",
     "tslint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
