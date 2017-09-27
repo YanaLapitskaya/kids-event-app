@@ -1,0 +1,20 @@
+{
+  "name": "express-typescript-skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && npm run gulp && node dist/main.js",
+    "gulp": "./node_modules/.bin/gulp",
+    "tslint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.2",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
+  }
+}
