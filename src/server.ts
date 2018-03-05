@@ -2,12 +2,11 @@ import * as express from "express";
 import * as session from "express-session";
 import * as bodyParser from "body-parser";
 import * as path from "path";
-import * as sassMiddleware from 'node-sass-middleware';
 /**
  * Controllers (route handlers).
  */
-import * as homeController from "./controllers/home";
-
+import ReviewRoutes from "./controllers/ReviewCtrl";
+import router from "./routes/index.route";
 /**
  * Create Express server.
  */
@@ -27,7 +26,7 @@ app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 
 app.use(express.static(path.join(__dirname, "../public"), { maxAge: 31557600000 }));
 
-app.get("/", homeController.index);
+app.use("/", router);
 /**
  * Start Express server.
  */
