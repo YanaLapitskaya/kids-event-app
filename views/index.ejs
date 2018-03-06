@@ -7,17 +7,21 @@
   </section>
   <section id="employees">
     <h3>Наши сотрудники</h3>
+    <% employees.forEach(function(employee){ %>
     <div class="employee">
-      <h4>Имя</h4>
-      <p>Описание</p>
+      <h4><%= employee.first_name %></h4>
+      <p><%= employee.description %></p>
     </div>
+    <% }); %>
   </section>
   <section id="reviews">
     <h3>Отзывы</h3>
-    <div class="review">
-      <h4>Имя</h4>
-      <p>Отзыв</p>
-    </div>
+    <% reviews.forEach(function(review){ %>
+      <div class="review">
+        <h4><%= review.name %></h4>
+        <p><%= review.text %></p>
+      </div>
+    <% }); %>
   </section>
 </main>
 <% include partials/footer %>
