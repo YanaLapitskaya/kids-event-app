@@ -13,4 +13,3 @@ export const Client = sequelize.define("Client", {
     notes: ORM.TEXT
 });
 
-
