@@ -2,19 +2,10 @@ import * as express from "express";
 import * as session from "express-session";
 import * as bodyParser from "body-parser";
 import * as path from "path";
-/**
- * Controllers (route handlers).
- */
-import ReviewRoutes from "./controllers/ReviewCtrl";
 import router from "./routes/index.route";
-/**
- * Create Express server.
- */
+
 const app = express();
 
-/**
- * Express configuration.
- */
 app.set("port", process.env.PORT || 3000);
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -24,12 +15,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 
-app.use(express.static(path.join(__dirname, "../public"), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.use("/", router);
-/**
- * Start Express server.
- */
+
 app.listen(app.get("port"), () => {
   console.log(("  App is running at http://localhost:%d in %s mode"), app.get("port"), app.get("env"));
   console.log("  Press CTRL-C to stop\n");

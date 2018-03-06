@@ -6,6 +6,7 @@ const options: Options = {
     benchmark: true,
     logging: console.log,
     define: {
+        underscored: true,
         timestamps: true,
         freezeTableName: true,
         createdAt: false,
