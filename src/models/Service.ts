@@ -1,15 +1,15 @@
 import { sequelize } from "../db/db";
 import * as ORM from "sequelize";
 
-export const Client = sequelize.define("Client", {
+export const Service = sequelize.define("Service", {
     id: {
         type: ORM.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    name: ORM.STRING,
-    phone: ORM.INTEGER,
-    social_networks: ORM.ARRAY(ORM.STRING),
-    notes: ORM.TEXT
+    photos: ORM.ARRAY(ORM.STRING),
+    title: ORM.STRING,
+    description: ORM.TEXT,
+    price: ORM.DOUBLE
 });
 

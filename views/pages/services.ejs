@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+<main>
+    <% services.forEach(function(service){ %>
+        <div class="service">
+            <img />
+            <p class="price">Цена: <%= service.price %></p>
+            <button>Заказать</button>
+            <h2><%= service.name %></h2>
+            <p><%= service.description %></p>
+        </div>
+    <% }); %>
+</main>
+<% include ../partials/footer %>
