@@ -1,22 +1,23 @@
 import { Client } from "./../models/Client";
 
-class ClientRepo {
-
-    constructor() {    }
-
-    getAllClients() {
+export default class ClientRepo {
+    static getAllClients() {
         return Client.findAll();
     }
-/*
-    getById(courseId) {
-        return Course.findById(courseId, {
-            include: [
-                {
-                    model: Lesson
-                }
-            ]
-        });
-    }*/
-}
 
-export default new ClientRepo();
+    static getClientById(id: any) {
+        return Client.findById(id);
+    }
+
+    static createClient(props: any) {
+        return Client.create(props);
+    }
+
+    static updateClient(id: Number, props: any) {
+        return Client.update(props, {where: {id}});
+    }
+
+    static deleteClient(id: Number) {
+        return Client.destroy({where: {id}});
+    }
+}

@@ -5,6 +5,7 @@ const dbUrl: string = "postgres://postgres:73904512@localhost:5432/kids-events";
 const options: Options = {
     benchmark: true,
     logging: console.log,
+    operatorsAliases: false,
     define: {
         underscored: true,
         timestamps: true,

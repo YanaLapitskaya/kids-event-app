@@ -1,12 +1,8 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import ReviewRepo from "../repositories/ReviewRepo";
 import { apiErrorHandler } from "../handlers/errorHandler";
 
 export default class ReviewRoutes {
-
-    constructor() {
-    }
-
     static getAllReviews(req: Request, res: Response, next: NextFunction) {
         ReviewRepo.getAllReviews()
             .then((result) => {
@@ -17,8 +13,16 @@ export default class ReviewRoutes {
             });
     }
 
+
+    static getReviewById(req: Request, res: Response) {
+        ReviewRepo.getReviewById(req.params.id)
+            .then((result) => res.json(result))
+            .catch((err) => {
+                apiErrorHandler(err, req, res, `Review ${req.params.id} not found.`);
+            });
+    }
+
     static addReview(req: Request, res: Response) {
-        console.log(req.body/*,  req['value']['body'] */);
         ReviewRepo.createReview(req.body)
             .then((result) => {
                 res.json(result);

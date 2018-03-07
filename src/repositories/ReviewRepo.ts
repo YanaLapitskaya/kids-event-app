@@ -1,24 +1,23 @@
 import { Review } from "../models/Review";
 
-class ReviewRepo {
-
-    constructor() {    }
-
-    getAllReviews() {
+export default class ReviewRepo {
+    static getAllReviews() {
         return Review.findAll();
     }
 
-    createReview(props: any) {
+    static getReviewById(id: number) {
+        return Review.findById(id);
+    }
+
+    static createReview(props: any) {
         return Review.create(props);
     }
 
-    updateReview(id: Number, props: any) {
+    static updateReview(id: number, props: any) {
         return Review.update(props, {where: { id }});
     }
 
-    deleteReview(id: Number) {
+    static deleteReview(id: number) {
         return Review.destroy({where: { id }});
     }
 }
-
-export default new ReviewRepo();

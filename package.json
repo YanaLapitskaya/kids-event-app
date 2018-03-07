@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/node-sass-middleware": "0.0.30",
     "@types/pg": "^7.4.5",
+    "@types/winston": "^2.3.8",
     "body-parser": "^1.18.2",
     "ejs": "~2.5.7",
     "express": "^4.16.2",

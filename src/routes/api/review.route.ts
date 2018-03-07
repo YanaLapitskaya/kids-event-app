@@ -7,6 +7,8 @@ router.route('/all').get(ReviewRoutes.getAllReviews);
 
 router.route('/').put(ReviewRoutes.addReview);
 
+router.route('/:id').get(ReviewRoutes.getReviewById);
+
 router.route('/:id').post(ReviewRoutes.editReview);
 
 router.route('/:id').delete(ReviewRoutes.deleteReview);
