@@ -14,4 +14,4 @@ dist
 package-lock.json
 
 # IDEA files
-.idea
+.idea/
