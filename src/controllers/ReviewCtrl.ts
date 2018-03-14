@@ -6,13 +6,12 @@ export default class ReviewRoutes {
     static getAllReviews(req: Request, res: Response, next: NextFunction) {
         ReviewRepo.getAllReviews()
             .then((result) => {
-                res.json(result);
+                res.status(200).send({reviews: result.map((r) => r.dataValues)});
             })
             .catch((err) => {
                 apiErrorHandler(err, req, res, "Fetch All Reviews failed.");
             });
     }
-
 
     static getReviewById(req: Request, res: Response) {
         ReviewRepo.getReviewById(req.params.id)

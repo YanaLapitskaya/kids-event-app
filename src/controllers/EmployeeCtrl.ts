@@ -6,7 +6,7 @@ export default class EmployeeRoutes {
     static getAllEmployees(req: Request, res: Response) {
         EmployeeRepo.getAllEmployees()
             .then((result) => {
-                res.json(result);
+                res.status(200).send({employees: result.map((empl) => empl.dataValues)});
             })
             .catch((err) => {
                 apiErrorHandler(err, req, res, "Fetch All Employees failed.");

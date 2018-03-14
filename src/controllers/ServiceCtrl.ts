@@ -6,7 +6,7 @@ export default class ServiceRoutes {
     static getAllServices(req: Request, res: Response) {
         ServiceRepo.getAllServices()
             .then((result) => {
-                res.json(result);
+                res.status(200).send({services: result.map((s) => s.dataValues)});
             })
             .catch((err) => {
                 apiErrorHandler(err, req, res, "Fetch All Services failed.");
