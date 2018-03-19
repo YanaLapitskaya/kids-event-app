@@ -8,7 +8,8 @@ export const Review = sequelize.define("Review", {
         autoIncrement: true
     },
     name: ORM.STRING,
-    text: ORM.STRING
+    text: ORM.STRING,
+    photo: ORM.STRING
 });
 
 
