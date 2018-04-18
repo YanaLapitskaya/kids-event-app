@@ -8,46 +8,48 @@ export default class EmployeeRoutes {
             .then((result) => {
                 res.status(200).send({employees: result.map((empl) => empl.dataValues)});
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Fetch All Employees failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static getEmployeeById(req: Request, res: Response) {
         EmployeeRepo.getEmployeeById(req.params.id)
-            .then((result) => res.json(result))
-            .catch((err) => {
-                apiErrorHandler(err, req, res, `Employee ${req.params.id} not found.`);
+            .then((empl) => {
+                res.status(200).send({employee: empl});
+            })
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static addEmployee(req: Request, res: Response) {
         EmployeeRepo.createEmployee(req.body)
-            .then((result) => {
-                res.json(result);
+            .then((empl: any) => {
+                res.status(200).send({employee: empl});
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Add Employee failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static editEmployee(req: Request, res: Response) {
         EmployeeRepo.updateEmployee(req.params.id, req.body)
             .then((result) => {
-                res.json(result);
+                res.sendStatus(200);
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Edit Employee failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static deleteEmployee(req: Request, res: Response) {
         EmployeeRepo.deleteEmployee(req.params.id)
             .then((result) => {
-                res.json(result);
+                res.sendStatus(200);
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Delete Employee failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 }
