@@ -8,46 +8,48 @@ export default class ServiceRoutes {
             .then((result) => {
                 res.status(200).send({services: result.map((s) => s.dataValues)});
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Fetch All Services failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static getServiceById(req: Request, res: Response) {
         ServiceRepo.getServiceById(req.params.id)
-            .then((result) => res.json(result))
-            .catch((err) => {
-                apiErrorHandler(err, req, res, `Service ${req.params.id} not found.`);
+            .then((service) => {
+                res.status(200).send({service: service});
+            })
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static addService(req: Request, res: Response) {
         ServiceRepo.createService(req.body)
-            .then((result) => {
-                res.json(result);
+            .then((service: any) => {
+                res.status(200).send({service: service});
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Add Service failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static editService(req: Request, res: Response) {
         ServiceRepo.updateService(req.params.id, req.body)
-            .then((result) => {
-                res.json(result);
+            .then((result: any) => {
+                res.sendStatus(200);
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Edit Service failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 
     static deleteService(req: Request, res: Response) {
         ServiceRepo.deleteService(req.params.id)
             .then((result) => {
-                res.json(result);
+                res.sendStatus(200);
             })
-            .catch((err) => {
-                apiErrorHandler(err, req, res, "Delete Service failed.");
+            .catch(err => {
+                throw new Error(JSON.stringify(err.message || err));
             });
     }
 }

@@ -11,7 +11,8 @@ export const Order = sequelize.define("Order", {
     },
     date: ORM.DATE,
     price: ORM.DOUBLE,
-    comments: ORM.TEXT
+    comments: ORM.TEXT,
+    status: ORM.TEXT
 });
 
 Order.belongsTo(Client, {foreignKey: "client_id" });

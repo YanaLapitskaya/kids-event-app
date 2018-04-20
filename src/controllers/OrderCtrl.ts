@@ -39,7 +39,7 @@ export default class OrderRoutes {
 
     static editOrder(req: Request, res: Response) {
         OrderRepo.updateOrder(req.params.id, req.body)
-            .then((result) => {
+            .then((result: any) => {
                 res.sendStatus(200);
             })
             .catch(err => {
