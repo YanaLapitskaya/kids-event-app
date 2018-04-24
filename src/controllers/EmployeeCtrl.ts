@@ -24,6 +24,11 @@ export default class EmployeeRoutes {
     }
 
     static addEmployee(req: Request, res: Response) {
+        if (req.file) {
+            const image = req.file;
+            req.body.photo = '/' + image.path.split('\\').splice(1).join('/');
+        }
+
         EmployeeRepo.createEmployee(req.body)
             .then((empl: any) => {
                 res.status(200).send({employee: empl});
@@ -34,9 +39,14 @@ export default class EmployeeRoutes {
     }
 
     static editEmployee(req: Request, res: Response) {
+        if (req.file) {
+            const image = req.file;
+            req.body.photo = '/' + image.path.split('\\').splice(1).join('/');
+        }
+
         EmployeeRepo.updateEmployee(req.params.id, req.body)
             .then((result) => {
-                res.sendStatus(200);
+                res.status(200).send({photo: req.body.photo});
             })
             .catch(err => {
                 throw new Error(JSON.stringify(err.message || err));

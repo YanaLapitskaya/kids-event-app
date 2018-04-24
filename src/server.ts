@@ -3,6 +3,7 @@ import * as session from "express-session";
 import * as bodyParser from "body-parser";
 import * as path from "path";
 import router from "./routes/index.route";
+const cors = require("cors");
 
 const app = express();
 
@@ -13,16 +14,16 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    next();
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  next();
 });
-app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 
 app.use(express.static(path.join(__dirname, "../public")));
+app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
 
 app.use("/", router);
 
