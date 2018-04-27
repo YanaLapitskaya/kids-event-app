@@ -9,7 +9,8 @@ export const Order = sequelize.define("Order", {
         primaryKey: true,
         autoIncrement: true
     },
-    date: ORM.DATE,
+    dateOrder: ORM.DATE,
+    dateService: ORM.DATE,
     price: ORM.DOUBLE,
     comments: ORM.TEXT,
     status: ORM.TEXT
