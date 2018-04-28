@@ -24,6 +24,11 @@ export default class ServiceRoutes {
     }
 
     static addService(req: Request, res: Response) {
+        if (req.file) {
+            const image = req.file;
+            req.body.photos.push('/' + image.path.split('\\').splice(1).join('/'));
+        }
+
         ServiceRepo.createService(req.body)
             .then((service: any) => {
                 res.status(200).send({service: service});
@@ -34,6 +39,14 @@ export default class ServiceRoutes {
     }
 
     static editService(req: Request, res: Response) {
+        if (!req.body.photos) {
+            req.body.photos = [];
+        }
+
+        req.files.forEach((file: any) => {
+            req.body.photos.push('/' + file.path.split('\\').splice(1).join('/'));
+        });
+
         ServiceRepo.updateService(req.params.id, req.body)
             .then((result: any) => {
                 res.sendStatus(200);
