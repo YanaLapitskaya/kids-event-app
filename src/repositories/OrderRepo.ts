@@ -20,8 +20,8 @@ export default class OrderRepo {
     static createOrder(props: any) {
         return Promise.all([
             Order.create(props),
-            Service.findAll( { where: {id: props.services}})
-        ]).then(([count, order, services]) => {
+            Service.findAll( { where: {id: props.Services[0].id}})
+        ]).then(([order, services]) => {
             order.setServices(services).then(() => {
                 this.updatePrice(order);
             });
@@ -32,7 +32,7 @@ export default class OrderRepo {
         return Promise.all([
             Order.update(props, {where: {id}}),
             Order.findById( id ),
-            Service.findAll( { where: {id: props.services}})
+            Service.findAll( { where: {id: props.Services[0].id}})
         ]).then(([count, order, services]) => {
             order.setServices(services)
                 .then(() => {
