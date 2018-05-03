@@ -4,7 +4,7 @@ var tslint = require("gulp-tslint");
 var tsProject = ts.createProject("tsconfig.json");
 
 gulp.task("tslint", function() {
-    return gulp.src('src/**/*.ts')
+    return gulp.src('src/*.ts')
         .pipe(tslint())
         .pipe(tslint.report())
 });

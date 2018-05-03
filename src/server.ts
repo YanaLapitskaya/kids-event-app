@@ -3,7 +3,10 @@ import * as session from "express-session";
 import * as bodyParser from "body-parser";
 import * as path from "path";
 import router from "./routes/index.route";
-const cors = require("cors");
+import * as passport from 'passport';
+import configurePassport from './passport-setup';
+import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
+import { googleConfigs, users } from './configs';
 
 const app = express();
 
@@ -23,7 +26,10 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, "../public")));
-app.use(session({ secret: "secret", resave: true, saveUninitialized: false }));
+app.use(session({ secret: "secret"}));
+app.use(passport.initialize());
+app.use(passport.session());
+configurePassport(passport);
 
 app.use("/", router);
 

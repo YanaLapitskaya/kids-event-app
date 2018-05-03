@@ -8,6 +8,9 @@ import orderRoutes from "./api/order.route";
 import serviceRoutes from "./api/service.route";
 import employeeRoutes from "./api/employee.route";
 import clientRoutes from "./api/client.route";
+import * as passport from 'passport';
+import { isAuthenticated } from "../passport-setup";
+import { INSPECT_MAX_BYTES } from "buffer";
 
 const router = Router();
 
@@ -17,6 +20,12 @@ router.use('/api/order', orderRoutes);
 router.use('/api/service', serviceRoutes);
 router.use('/api/employee', employeeRoutes);
 router.use('/api/client', clientRoutes);
+
+router.route('/google-login').get(passport.authenticate('google', { failureRedirect: '/error' }),  function(req, res) {
+    res.send(200);
+});
+
+router.route('/login').get(passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 router.route('/').get((req, res) => {
     res.redirect('/about');
@@ -35,7 +44,7 @@ router.route('/about').get((req, res, next) => {
         });
 });
 
-router.route('/gallery').get((req, res, next) => {
+router.route('/gallery').get(isAuthenticated, (req, res, next) => {
     res.render("pages/gallery");
 });
 
