@@ -10,7 +10,6 @@ import employeeRoutes from "./api/employee.route";
 import clientRoutes from "./api/client.route";
 import * as passport from 'passport';
 import { isAuthenticated } from "../passport-setup";
-import { INSPECT_MAX_BYTES } from "buffer";
 
 const router = Router();
 
@@ -44,7 +43,7 @@ router.route('/about').get((req, res, next) => {
         });
 });
 
-router.route('/gallery').get(isAuthenticated, (req, res, next) => {
+router.route('/gallery').get((req, res, next) => {
     res.render("pages/gallery");
 });
 
