@@ -9,7 +9,7 @@ export const Client = sequelize.define("Client", {
     },
     name: ORM.STRING,
     phone: ORM.INTEGER,
-    social_networks: ORM.ARRAY(ORM.STRING),
+    socials: ORM.ARRAY(ORM.STRING),
     notes: ORM.TEXT
 });
 
