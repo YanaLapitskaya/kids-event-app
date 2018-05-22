@@ -24,9 +24,11 @@ export default class ServiceRoutes {
     }
 
     static addService(req: Request, res: Response) {
-        if (req.file) {
-            const image = req.file;
-            req.body.photos.push('/' + image.path.split('\\').splice(1).join('/'));
+        if (req.files.length !== 0) {
+            if (!req.body.photos) req.body.photos = [];
+            req.files.forEach((file: any) => {
+                req.body.photos.push('/' + file.path.split('\\').splice(1).join('/'));
+            });
         }
 
         ServiceRepo.createService(req.body)
