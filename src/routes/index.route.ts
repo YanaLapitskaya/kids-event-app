@@ -10,6 +10,7 @@ import employeeRoutes from "./api/employee.route";
 import clientRoutes from "./api/client.route";
 import * as passport from 'passport';
 import { isAuthenticated } from "../passport-setup";
+import UserRoutes from "../controllers/UserCtrl";
 
 const router = Router();
 
@@ -24,7 +25,9 @@ router.route('/google-login').get(passport.authenticate('google', { failureRedir
     res.send(200);
 });
 
-router.route('/login').get(passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+// router.route('/login').get(passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+router.route('/api/login').post(UserRoutes.login);
+router.route('/api/logout').get(UserRoutes.logout);
 
 router.route('/').get((req, res) => {
     res.redirect('/about');
